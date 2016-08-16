@@ -989,75 +989,12 @@ namespace nona
 
         private void b_fun_file_save_Click(object sender, EventArgs e)
         {
-            int i;
             if (saveFileDialog_fun.ShowDialog() == DialogResult.OK)
             {
                 List<DataGridView> objects_tofile = new List<DataGridView>();
                 objects_tofile.Add(dgv_fun);
                 objects_tofile.Add(dgv_par);
                 objects_tofile.Add(dgv_usl);
-                
-
-
-
-                /*
-                DataColumn column = new DataColumn();
-                DataRow dataRow;
-                DataTable dt_fun = new DataTable();
-                for (i = 1; i < dgv_fun.Columns.Count + 1; i++)
-                {
-                    column = new DataColumn(dgv_fun.Columns[i - 1].HeaderText);
-                    dt_fun.Columns.Add(column);
-                }
-                int ColumnCount = dgv_fun.Columns.Count;
-                foreach (DataGridViewRow dr in dgv_fun.Rows)
-                {
-                    dataRow = dt_fun.NewRow();
-                    for (i = 0; i < ColumnCount; i++)
-                    {
-                        dataRow[i] = dr.Cells[i].ToString();
-                    }
-                }
-                objects_tofile.Add(dt_fun);
-
-                DataTable dt_par = new DataTable();
-                for (i = 1; i < dgv_par.Columns.Count + 1; i++)
-                {
-                    column = new DataColumn(dgv_par.Columns[i - 1].HeaderText);
-                    dt_par.Columns.Add(column);
-                }
-                ColumnCount = dgv_par.Columns.Count;
-                foreach (DataGridViewRow dr in dgv_par.Rows)
-                {
-                    dataRow = dt_par.NewRow();
-                    for (i = 0; i < ColumnCount; i++)
-                    {
-                        dataRow[i] = dr.Cells[i].ToString();
-                    }
-                }
-                objects_tofile.Add(dt_par);
-
-                DataTable dt_usl = new DataTable();
-                for (i = 1; i < dgv_usl.Columns.Count + 1; i++)
-                {
-                    column = new DataColumn(dgv_usl.Columns[i - 1].HeaderText);
-                    dt_usl.Columns.Add(column);
-                }
-                ColumnCount = dgv_usl.Columns.Count;
-                foreach (DataGridViewRow dr in dgv_fun.Rows)
-                {
-                    //dataRow = dt_usl.NewRow();
-                    for (i = 0; i < ColumnCount; i++)
-                    {
-                       dt_usl.Rows.Add(dr.Cells[i]);
-                    }
-                }
-                objects_tofile.Add(dt_usl);
-                */
-
-
-
-
 
                 filework.file_save(saveFileDialog_fun.FileName, objects_tofile);
             }
