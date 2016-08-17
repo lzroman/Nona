@@ -636,8 +636,8 @@ namespace nona
             /*lb_fun_shab.Items.Add("Неймарка-Сакера");
             lb_fun_shab.Items.Add("Дуффинга");*/
 
-            saveFileDialog_fun.Filter = "Discrete solver file (.dsf)|*.dsf";
-            openFileDialog_fun.Filter = "Discrete solver file (.dsf)|*.dsf";
+            saveFileDialog_fun.Filter = "Nona file (.nonaf)|*.nonaf";
+            openFileDialog_fun.Filter = "Nona file (.nonaf)|*.nonaf";
 
             string[] args = Environment.GetCommandLineArgs();
 

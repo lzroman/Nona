@@ -48,10 +48,6 @@ namespace nona
         }
 
         /*
-        комментарии, блджад!!1!!11!!
-        опишем хотя бы здесь все параметры вызова функции
-        сама функция возвращает битмапку с картой
-
         dynamic_compiler.Func func
             ссылка на матфункцию
         int numb_fun
@@ -62,8 +58,6 @@ namespace nona
             старые переменные
         double[] pars
             параметры
-        
-        ааа в жопу
         */
         public Bitmap map(int N, double[] an, double[] al, double[] pars, double a1, double a2, int a_n, double b1, double b2, int b_n, int x_n, int x_s, double eps, double inf, int pp_a, int pp_p1, int pp_p2, int size_x,int size_y, bool t_ulast)
         {

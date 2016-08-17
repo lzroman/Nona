@@ -28,15 +28,13 @@ namespace nona
             //XmlSerializer serializer = new XmlSerializer(typeof(List<string>));
 
             
-            //objects_out.Add("1.0");
-            
+            objects_out.Add(new List<string> { "1.0" });
             
             int i, n;
 
             DataGridView dgv_temp = new DataGridView();
 
-
-            dgv_temp = (DataGridView)objects_in[0];
+            dgv_temp = objects_in[0];
 
             n = dgv_temp.RowCount;
 
@@ -63,7 +61,7 @@ namespace nona
 
 
 
-            dgv_temp = (DataGridView)objects_in[1];
+            dgv_temp = objects_in[1];
             n = dgv_temp.RowCount;
 
             List<String> l_par_0 = new List<string>();
@@ -77,7 +75,7 @@ namespace nona
 
 
 
-            dgv_temp = (DataGridView)objects_in[2];
+            dgv_temp = objects_in[2];
             n = dgv_temp.RowCount;
 
             List<String> l_usl_0 = new List<string>();
@@ -93,12 +91,6 @@ namespace nona
                 l_usl_2.Add(dgv_temp[2, i].Value.ToString());
             objects_out.Add(l_usl_2);
             
-            
-
-
-            //using (var fs = File.OpenWrite(path))
-            //    serializer.Serialize(fs, objects_out);
-            //serializer.Serialize(fs, objects_out);
             using (FileStream fs = new FileStream(path, FileMode.Create))
                 serializer.Serialize(fs, objects_out);
 
@@ -115,42 +107,33 @@ namespace nona
             {
                 objects_in_file = (List<List<string>>)serializer.Deserialize(fs);
             }
-            /*
-            switch ((string)objects_in[0])
+            switch ((string)objects_in_file[0][0])
             {
                 case "1.0":
-                    objects_out = open_v_1_0(objects_in);
+                    open_v_1_0(objects_in, objects_in_file);
                     break;
             }
-            */
-
-            int i;
-
-
-
-            for (i = 0; i < objects_in_file[0].Count; i++)
-            {
-                objects_in[0].Rows.Add(objects_in_file[0][i], objects_in_file[1][i], "", objects_in_file[3][i], objects_in_file[4][i]);
-                if (objects_in_file[2][i] == "True")
-                    objects_in[0][2, i].Value = true;
-            }
-
-            for (i = 0; i < objects_in_file[5].Count; i++)
-                objects_in[1].Rows.Add(objects_in_file[5][i], objects_in_file[6][i]);
-
-            for (i = 0; i < objects_in_file[7].Count; i++)
-                objects_in[2].Rows.Add(objects_in_file[7][i], objects_in_file[8][i], objects_in_file[9][i]);
         }
 
-        private List<object> open_v_1_0(List<object> objects_in)
+        private void open_v_1_0(List<DataGridView> objects_in, List<List<string>> objects_in_file)
         {
             List<object> objects_out = new List<object>();
 
-            objects_out.Add(objects_in[1]);
-            objects_out.Add(objects_in[2]);
-            objects_out.Add(objects_in[3]);
+            int i;
 
-            return objects_out;
+            for (i = 0; i < objects_in_file[1].Count; i++)
+            {
+                objects_in[0].Rows.Add(objects_in_file[1][i], objects_in_file[2][i], "", objects_in_file[4][i], objects_in_file[5][i]);
+                if (objects_in_file[3][i] == "True")
+                    objects_in[0][2, i].Value = true;
+            }
+
+            for (i = 0; i < objects_in_file[6].Count; i++)
+                objects_in[1].Rows.Add(objects_in_file[6][i], objects_in_file[7][i]);
+
+            for (i = 0; i < objects_in_file[8].Count; i++)
+                objects_in[2].Rows.Add(objects_in_file[8][i], objects_in_file[9][i], objects_in_file[10][i]);
+
         }
     }
 }
