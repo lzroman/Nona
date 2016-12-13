@@ -5,14 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace nona
+namespace nona.calc
 {
     class diagram
     {
+        public struct settings
+        {
+            public double[] an, al, pars;
+            public double a1, a2, x1, x2;
+            public int t_a, t_x, skip_x, diag_a, diag_p;
+        }
 
         Bitmap bm_graph;
         Graphics gr_box;
         bool stop;
+        public settings set;
 
         private dynamic_compiler.Func func { get; set; }
         int numb_fun { get; set; }
@@ -34,7 +41,7 @@ namespace nona
         {
             int i, j, k, draw_a, draw_x;
             double step_a = (a2 - a1) / t_a;
-
+            
             double[] a0 = new double[numb_fun];
             for (i = 0; i < numb_fun; i++)
                 a0[i] = an[i];

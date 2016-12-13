@@ -5,12 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace nona
+namespace nona.calc
 {
     class map_r
     {
         int pmax;
-        List<Form1.cnum_col> num_col = new List<Form1.cnum_col>();
+        List<nona.Form1.cnum_col> num_col = new List<nona.Form1.cnum_col>();
 
         double[] a_i, b_i = new double[0];
 
@@ -41,7 +41,7 @@ namespace nona
             pbar_in = pbar_in_in;
         }
 
-        public void col_set(List<Form1.cnum_col> num_col_in, int pmax_in)
+        public void col_set(List<nona.Form1.cnum_col> num_col_in, int pmax_in)
         {
             num_col = num_col_in;
             pmax = pmax_in;

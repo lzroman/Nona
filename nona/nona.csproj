@@ -77,30 +77,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="diagram.cs" />
+    <Compile Include="calc\diagram.cs" />
     <Compile Include="dynamic_compiler.cs" />
     <Compile Include="fileworker.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="forms\form_main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="forms\form_main.Designer.cs">
+      <DependentUpon>form_main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2_ph.cs">
+    <Compile Include="forms\form_ph.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2_ph.Designer.cs">
-      <DependentUpon>Form2_ph.cs</DependentUpon>
+    <Compile Include="forms\form_ph.Designer.cs">
+      <DependentUpon>form_ph.cs</DependentUpon>
     </Compile>
-    <Compile Include="map_r.cs" />
-    <Compile Include="phas_port.cs" />
+    <Compile Include="calc\map_r.cs" />
+    <Compile Include="calc\phas_port.cs" />
+    <Compile Include="graphics\settings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="forms\form_main.resx">
+      <DependentUpon>form_main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2_ph.resx">
-      <DependentUpon>Form2_ph.cs</DependentUpon>
+    <EmbeddedResource Include="forms\form_ph.resx">
+      <DependentUpon>form_ph.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -129,7 +130,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 и x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -138,6 +139,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

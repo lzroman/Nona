@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace nona
+namespace nona.calc
 {
     class phas_port
     {

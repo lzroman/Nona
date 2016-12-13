@@ -21,14 +21,14 @@ namespace nona
 
         dynamic_compiler compiler;
         dynamic_compiler.Func func;
-        diagram diag;
+        calc.diagram diag;
         fileworker filework = new fileworker();
 
-        phas_port ph_port;
+        calc.phas_port ph_port;
 
-        map_r map = new map_r();
+        calc.map_r map;
         bool map_ready = false;
-
+        
         Task map_drawer;
 
         public class cnum_col
@@ -83,27 +83,23 @@ namespace nona
             pb_w = pictureBox1.Width;
             pb_h = pictureBox1.Height;
 
-            if (!ph_form2)
+            if (wtd == 1)
             {
                 bm_graph = ph_port.get_pp(an, al, pars, x1, x2, y1, y2, numb, dgv_par.Rows.Count - 1, skip_n, fp_a1, fp_a2, pb_w, pb_h);
+                b_graph = true;
+                pictureBox1.Refresh();
             }
             else
             {
                 bm_form2 = ph_port.get_pp(an, al, pars, x1, x2, y1, y2, numb, dgv_par.Rows.Count - 1, skip_n, fp_a1, fp_a2, pb_w, pb_h);
             };
-
-            if (!ph_form2)
-            {
-                b_graph = true;
-                pictureBox1.Refresh();
-            }
         }
 
         private void bsave_Click(object sender, EventArgs e)
         {
+            wtd = 1;
             get_all();
             draw();
-            wtd = 1;
             b_zone.Enabled = true;
             b_graph = true;
         }
@@ -366,6 +362,8 @@ namespace nona
                     get_last();
 
                     draw();
+                    if (form2 == null)
+                        form2 = new Form2_ph();
                     form2.set_bitmap(bm_form2);
                     form2.Show();
                 };
@@ -687,10 +685,10 @@ namespace nona
 
             compiler = new dynamic_compiler(dgv_fun, dgv_par, dgv_usl);
             func = (dynamic_compiler.Func)compiler.compile();
-            map = new map_r(func, numb_fun, pbar);
+            map = new calc.map_r(func, numb_fun, pbar);
             map_ready = true;
-            ph_port = new phas_port(func, numb_fun);
-            diag = new diagram(func, numb_fun);
+            ph_port = new calc.phas_port(func, numb_fun);
+            diag = new calc.diagram(func, numb_fun);
             col_save();
         }
 
