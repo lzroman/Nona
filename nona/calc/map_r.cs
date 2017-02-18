@@ -14,16 +14,15 @@ namespace nona.calc
 
         double[] a_i, b_i = new double[0];
 
-        //public dynamic_compiler.Func func;
-        private dynamic_compiler.Func func { get; set; }
-        int numb_fun { get; set; }
-        ProgressBar pbar_in { get; set; }
+        graphics.settings.map_r graph_set;
+        graphics.map_r graph;
 
-        int[,] t_count;
+        dynamic_compiler.Func func;
+        int numb_fun;
+        ProgressBar pbar_in;
+
         int state = 0;
 
-        Bitmap bm_graph;
-        Graphics gr_box;
         ProgressBar pbar;
 
         Brush br_black = new SolidBrush(Color.Black);
@@ -59,19 +58,28 @@ namespace nona.calc
         double[] pars
             параметры
         */
-        public Bitmap map(int N, double[] an, double[] al, double[] pars, double a1, double a2, int a_n, double b1, double b2, int b_n, int x_n, int x_s, double eps, double inf, int pp_a, int pp_p1, int pp_p2, int size_x,int size_y, bool t_ulast)
+        public Bitmap map(int N, double[] an, double[] al, double[] pars, double a1, double a2, int a_n, double b1, double b2, int b_n, int x_n, int x_s, double eps, double inf, int pp_a, int pp_p1, int pp_p2, int pb_w, int pb_h, bool t_ulast)
         {
-            int i, j, k, draw_a, draw_b;
+            int i, j;
             double a_step, b_step, ad;
-            bool col_sel = false;
             pbar = pbar_in;
             state = 0;
+
+            graph_set.pboxsize.X = pb_w;
+            graph_set.pboxsize.Y = pb_h;
+            graph_set.px_min = b1;
+            graph_set.px_max = b2;
+            graph_set.py_min = a1;
+            graph_set.py_max = a2;
+            graph_set.px_num = b_n;
+            graph_set.py_num = a_n;
+            graph_set.num_col = num_col;
+            graph = new graphics.map_r(graph_set);
 
             double[] a0 = new double[numb_fun];
             for (i = 0; i < numb_fun; i++)
                 a0[i] = an[i];
 
-            t_count = new int[a_n, b_n];
             List<double> t_points = new List<double>();
             t_points.Clear();
 
@@ -87,150 +95,12 @@ namespace nona.calc
             {
                 int a_n1 = Convert.ToInt32(a_n * i / N), a_n2 = Convert.ToInt32(a_n * (i + 1) / N);
                 double ac1 = a1 + a_n1 * ad / a_n, ac2 = a1 + a_n2 * ad / a_n;
-                //funcs[i] = (dynamic_compiler.Func)func.Clone();
                 taskArray[i] = Task.Factory.StartNew(() => calc(numb_fun, t_ulast, a0, pars, ac1, ac2, a_n1, a_n2, b1, b2, b_n, x_n, x_s, eps, inf, pp_a, pp_p1, pp_p2));
             };
 
             Task.WaitAll(taskArray);
 
-            /*for (i = 0; i < a_n; i++)
-            {
-                pars[pp_p2] = b1 + b_step / 2;
-                for (j = 0; j < b_n; j++)
-                {
-                    if (!t_ulast)
-                    {
-                        for (k = 0; k < numb_fun; k++)
-                            al[k] = a0[k];
-                    };
-                    for (k = 0; k < x_n; k++)
-                    {
-                        an = func(al, pars);
-
-                        if (Math.Abs(an[pp_a]) >= inf)
-                        {
-                            stop = true;
-                        }
-
-                        for (l = 0; l < numb_fun; l++)
-                        {
-                            if (Double.IsNaN(an[l]))
-                            {
-                                stop = true;
-                                break;
-                            }
-                        };
-
-                        if (stop)
-                            break;
-
-                        if (k > x_s)
-                        {
-                            if (t_points.Count < pmax)
-                            {
-                                if (t_points.Count == 0)
-                                {
-                                    t_points.Add(an[pp_a]);
-                                }
-                                else
-                                {
-                                    for (l = 0; l < t_points.Count; l++)
-                                    {
-                                        if (Math.Abs(an[pp_a] - t_points[l]) <= eps)
-                                        {
-                                            t_got = true;
-                                            break;
-                                        };
-                                    };
-                                    if (t_got == false)
-                                        t_points.Add(an[pp_a]);
-                                };
-                            }
-                            /*else////отдельный поиск бесконечности
-                            {
-                                for (l = 0; l < numb_fun; l++)
-                                {
-                                    if (Double.IsNaN(an[l]))
-                                    {
-                                        stop = true;
-                                        break;
-                                    }
-                                };
-                                if (stop)
-                                    break;
-                            };////
-                        };
-
-                        t_got = false;
-
-                        al = an;
-                    };
-
-                    if (stop)
-                    {
-                        t_count[i, j] = -1;
-                        stop = false;
-                    }
-                    else
-                        t_count[i, j] = t_points.Count;
-                    t_points.Clear();
-                    if (t_count[i, j] > t_c_max)
-                        t_c_max = t_count[i, j];
-
-                    pars[pp_p2] += b_step;
-                };
-
-                pars[pp_p1] += a_step;
-            };*/
-
-            bm_graph = new Bitmap(size_x, size_y);
-            Graphics gr_box = Graphics.FromImage(bm_graph);
-
-            for (i = 0; i < a_n; i++)
-            {
-                for (j = 0; j < b_n; j++)
-                {
-                    col_sel = false;
-                    for (k = 0; k < num_col.Count(); k++)
-                    {
-                        if (t_count[i, j] == num_col[k].num)
-                        {
-                            col_sel = true;
-                            br_t = new SolidBrush(Color.FromArgb(num_col[k].r, num_col[k].g, num_col[k].b));
-                            break;
-                        };
-                    };
-                    if (!col_sel)
-                    {
-                        br_t = new SolidBrush(Color.FromArgb(num_col[1].r, num_col[1].g, num_col[1].b));
-                    };
-                    gr_box.FillRectangle(br_t, new Rectangle(Convert.ToInt32(j * 1.0 * size_x / b_n), Convert.ToInt32(size_y - (i + 1) * 1.0 * size_y / a_n), Convert.ToInt32(size_x * 1.0 / b_n + 1), Convert.ToInt32(size_y * 1.0 / a_n + 1)));
-                };
-            };
-
-            //setka_start
-
-            gr_box.DrawLine(p_black, new Point(0, size_y - 1), new Point(size_x - 1, size_y - 1));
-            gr_box.DrawLine(p_black, new Point(0, size_y - 1), new Point(0, 0));
-            gr_box.DrawString(Convert.ToString(b1), drawFont, br_black, new Point(1, size_y - 25));
-            gr_box.DrawString(Convert.ToString(b2), drawFont, br_black, new Point(size_x - 20, size_y - 25));
-            gr_box.DrawString(Convert.ToString(a1), drawFont, br_black, new Point(8, size_y - 15));
-            gr_box.DrawString(Convert.ToString(a2), drawFont, br_black, new Point(8, 2));
-            gr_box.DrawLine(p_black, new Point(size_x - 1, size_y - 1), new Point(size_x - 1, size_y - 7));
-            gr_box.DrawLine(p_black, new Point(0, 0), new Point(6, 0));
-            for (i = 1; i < 10; i++)
-            {
-                draw_a = Convert.ToInt32(size_x * i / 10);
-                draw_b = Convert.ToInt32(size_y * i / 10);
-                gr_box.DrawLine(p_black, new Point(draw_a, size_y - 1), new Point(draw_a, size_y - 7));
-                gr_box.DrawString(Convert.ToString(b1 + (b2 - b1) * i / 10), drawFont, br_black, new Point(draw_b - 10, size_y - 25));
-                gr_box.DrawLine(p_black, new Point(0, size_y - 1 - draw_b), new Point(6, size_y - 1 - draw_b));
-                gr_box.DrawString(Convert.ToString(a1 + (a2 - a1) * i / 10), drawFont, br_black, new Point(8, size_y - 10 - draw_a));
-            };
-
-            //setka_end
-
-            return bm_graph;
+            return graph.Draw();
         }
 
         private void calc(int numb_fun, bool t_ulast, double[] a0, double[] pars0, double a1, double a2, int a_n1, int a_n2, double b1, double b2, int b_n, int x_n, int x_s, double eps, double inf, int pp_a, int pp_p1, int pp_p2)
@@ -329,14 +199,14 @@ namespace nona.calc
 
                     if (stop)
                     {
-                        t_count[i, j] = -1;
+                        graph[i, j] = -1;
                         stop = false;
                     }
                     else
-                        t_count[i, j] = t_points.Count;
+                        graph[i, j] = t_points.Count;
                     t_points.Clear();
-                    if (t_count[i, j] > t_c_max)
-                        t_c_max = t_count[i, j];
+                    if (graph[i, j] > t_c_max)
+                        t_c_max = graph[i, j];
 
                     pars[pp_p2] += b_step;
                     state++;

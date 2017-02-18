@@ -130,6 +130,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label37 = new System.Windows.Forms.Label();
+            this.tb_step = new System.Windows.Forms.TextBox();
             this.b_fun_file_save = new System.Windows.Forms.Button();
             this.b_fun_file_open = new System.Windows.Forms.Button();
             this.b_dgv_usl_d = new System.Windows.Forms.Button();
@@ -464,18 +466,18 @@
             this.label30.AutoSize = true;
             this.label30.Location = new System.Drawing.Point(317, 63);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(70, 13);
+            this.label30.Size = new System.Drawing.Size(71, 13);
             this.label30.TabIndex = 81;
-            this.label30.Text = "Параметр 2:";
+            this.label30.Text = "Параметр Y:";
             // 
             // label29
             // 
             this.label29.AutoSize = true;
             this.label29.Location = new System.Drawing.Point(317, 36);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(70, 13);
+            this.label29.Size = new System.Drawing.Size(71, 13);
             this.label29.TabIndex = 80;
-            this.label29.Text = "Параметр 1:";
+            this.label29.Text = "Параметр X:";
             // 
             // label28
             // 
@@ -677,11 +679,11 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(344, 97);
+            this.label19.Location = new System.Drawing.Point(336, 97);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(72, 13);
+            this.label19.Size = new System.Drawing.Size(73, 13);
             this.label19.TabIndex = 52;
-            this.label19.Text = "Точек по П1:";
+            this.label19.Text = "Точек по OX:";
             // 
             // label20
             // 
@@ -724,9 +726,9 @@
             this.label22.AutoSize = true;
             this.label22.Location = new System.Drawing.Point(336, 175);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(72, 13);
+            this.label22.Size = new System.Drawing.Size(73, 13);
             this.label22.TabIndex = 55;
-            this.label22.Text = "Точек по П2:";
+            this.label22.Text = "Точек по OY:";
             // 
             // tabPage2
             // 
@@ -1122,6 +1124,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.label37);
+            this.tabPage4.Controls.Add(this.tb_step);
             this.tabPage4.Controls.Add(this.b_fun_file_save);
             this.tabPage4.Controls.Add(this.b_fun_file_open);
             this.tabPage4.Controls.Add(this.b_dgv_usl_d);
@@ -1141,9 +1145,26 @@
             this.tabPage4.Text = "Функция";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(12, 277);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(30, 13);
+            this.label37.TabIndex = 85;
+            this.label37.Text = "Шаг:";
+            // 
+            // tb_step
+            // 
+            this.tb_step.Location = new System.Drawing.Point(48, 273);
+            this.tb_step.Name = "tb_step";
+            this.tb_step.Size = new System.Drawing.Size(100, 20);
+            this.tb_step.TabIndex = 84;
+            this.tb_step.Text = "0,01";
+            // 
             // b_fun_file_save
             // 
-            this.b_fun_file_save.Location = new System.Drawing.Point(3, 321);
+            this.b_fun_file_save.Location = new System.Drawing.Point(6, 328);
             this.b_fun_file_save.Name = "b_fun_file_save";
             this.b_fun_file_save.Size = new System.Drawing.Size(200, 23);
             this.b_fun_file_save.TabIndex = 83;
@@ -1153,7 +1174,7 @@
             // 
             // b_fun_file_open
             // 
-            this.b_fun_file_open.Location = new System.Drawing.Point(3, 292);
+            this.b_fun_file_open.Location = new System.Drawing.Point(6, 299);
             this.b_fun_file_open.Name = "b_fun_file_open";
             this.b_fun_file_open.Size = new System.Drawing.Size(200, 23);
             this.b_fun_file_open.TabIndex = 82;
@@ -1194,7 +1215,7 @@
             // lb_fun_shab
             // 
             this.lb_fun_shab.FormattingEnabled = true;
-            this.lb_fun_shab.Location = new System.Drawing.Point(209, 292);
+            this.lb_fun_shab.Location = new System.Drawing.Point(212, 299);
             this.lb_fun_shab.Name = "lb_fun_shab";
             this.lb_fun_shab.Size = new System.Drawing.Size(139, 134);
             this.lb_fun_shab.TabIndex = 78;
@@ -1289,7 +1310,7 @@
             // 
             // b_add_eno
             // 
-            this.b_add_eno.Location = new System.Drawing.Point(354, 346);
+            this.b_add_eno.Location = new System.Drawing.Point(357, 353);
             this.b_add_eno.Name = "b_add_eno";
             this.b_add_eno.Size = new System.Drawing.Size(156, 23);
             this.b_add_eno.TabIndex = 75;
@@ -1372,6 +1393,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_usl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_fun)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_par)).EndInit();
@@ -1508,6 +1530,8 @@
         private System.Windows.Forms.Button b_fun_file_open;
         private System.Windows.Forms.SaveFileDialog saveFileDialog_fun;
         private System.Windows.Forms.OpenFileDialog openFileDialog_fun;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.TextBox tb_step;
     }
 }
 

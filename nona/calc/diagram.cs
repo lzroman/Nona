@@ -16,30 +16,35 @@ namespace nona.calc
             public int t_a, t_x, skip_x, diag_a, diag_p;
         }
 
-        Bitmap bm_graph;
-        Graphics gr_box;
+        graphics.settings.diagram graph_set;
         bool stop;
         public settings set;
+        graphics.diagram graph;
 
-        private dynamic_compiler.Func func { get; set; }
-        int numb_fun { get; set; }
-
-        Brush br_black = new SolidBrush(Color.Black);
-        Pen p_black = new Pen(Color.Black, 1);
-        Font drawFont = new Font("Arial", 10);
-
-        public diagram()
-        { }
+        dynamic_compiler.Func func;
+        int numb_fun;
 
         public diagram(dynamic_compiler.Func func_in, int numb_fun_in)
         {
             func = func_in;
             numb_fun = numb_fun_in;
+            //сюда запихать настройки графики
+
         }
 
         public Bitmap diag(double[] an, double[] al, double[] pars, double a1, double a2, int t_a, double x1, double x2, int t_x, int skip_x, int dia_a, int dia_p, int pb_w, int pb_h)
         {
-            int i, j, k, draw_a, draw_x;
+            graph_set.pboxsize.X = pb_w;
+            graph_set.pboxsize.Y = pb_h;
+            graph_set.a_min = x1;
+            graph_set.a_max = x2;
+            graph_set.p_min = a1;
+            graph_set.p_max = a2;
+            graph_set.p_num = t_a;
+
+            graph = new graphics.diagram(graph_set);
+
+            int i, j, k;
             double step_a = (a2 - a1) / t_a;
             
             double[] a0 = new double[numb_fun];
@@ -47,28 +52,6 @@ namespace nona.calc
                 a0[i] = an[i];
 
             pars[dia_p] = a1;
-
-            bm_graph = new Bitmap(pb_w, pb_h);
-            gr_box = Graphics.FromImage(bm_graph);
-
-            gr_box.Clear(Color.White);
-            gr_box.DrawLine(p_black, new Point(0, pb_h - 1), new Point(pb_w - 1, pb_h - 1));
-            gr_box.DrawLine(p_black, new Point(0, pb_h - 1), new Point(0, 0));
-            gr_box.DrawString(Convert.ToString(a1), drawFont, br_black, new Point(1, pb_h - 25));
-            gr_box.DrawString(Convert.ToString(a2), drawFont, br_black, new Point(pb_w - 20, pb_h - 25));
-            gr_box.DrawString(Convert.ToString(x1), drawFont, br_black, new Point(8, pb_h - 15));
-            gr_box.DrawString(Convert.ToString(x2), drawFont, br_black, new Point(8, 2));
-            gr_box.DrawLine(p_black, new Point(pb_w - 1, pb_h - 1), new Point(pb_w - 1, pb_h - 7));
-            gr_box.DrawLine(p_black, new Point(0, 0), new Point(6, 0));
-            for (i = 1; i < 10; i++)
-            {
-                draw_a = Convert.ToInt32(pb_w * i / 10);
-                draw_x = Convert.ToInt32(pb_h * i / 10);
-                gr_box.DrawLine(p_black, new Point(draw_a, pb_h - 1), new Point(draw_a, pb_h - 7));
-                gr_box.DrawString(Convert.ToString(a1 + (a2 - a1) * i / 10), drawFont, br_black, new Point(draw_a - 10, pb_h - 25));
-                gr_box.DrawLine(p_black, new Point(0, pb_h - 1 - draw_x), new Point(6, pb_h - 1 - draw_x));
-                gr_box.DrawString(Convert.ToString(x1 + (x2 - x1) * i / 10), drawFont, br_black, new Point(8, pb_h - 10 - draw_x));
-            };
 
             for (j = 0; j < t_a; j++)
             {
@@ -90,13 +73,12 @@ namespace nona.calc
                         break;
 
                     if (i > skip_x && (Math.Abs(an[dia_a]) < x1 || Math.Abs(an[dia_a]) < x2))
-                        gr_box.FillRectangle(br_black, new Rectangle(Convert.ToInt32((pars[dia_p] - a1) * pb_w / (a2 - a1)), Convert.ToInt32(pb_h - 1 - (an[dia_a] - x1) * pb_h / (x2 - x1)), 1, 1));
-
+                        graph.Add(j, an[dia_a]);
                     al = an;
                 };
                 pars[dia_p] += step_a;
             };
-            return bm_graph;
+            return graph.Draw();
         }
 
         public void diag_file(dynamic_compiler.Func func, int numb_fun, double[] an, double[] al, double[] pars, double a1, double a2, int t_a, int t_x, int dia_a, int dia_p, System.IO.StreamWriter file_work)

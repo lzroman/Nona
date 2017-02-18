@@ -94,6 +94,9 @@
     </Compile>
     <Compile Include="calc\map_r.cs" />
     <Compile Include="calc\phas_port.cs" />
+    <Compile Include="graphics\diagram.cs" />
+    <Compile Include="graphics\map_r.cs" />
+    <Compile Include="graphics\phas_port.cs" />
     <Compile Include="graphics\settings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

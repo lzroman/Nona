@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 //using System.Threading;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace nona
 {
@@ -600,9 +602,14 @@ namespace nona
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            string version = fvi.FileVersion;
+
+            this.Text = "Nona (ver. " + version + ")";
+
             dgv_colors.Rows.Add(-1, 255, 255, 255);
             dgv_colors.Rows.Add(0, 127, 127, 127);
-
 
             dgv_colors.Rows.Add(1, 255, 0, 0);
             dgv_colors.Rows.Add(2, 127, 0, 0);
@@ -631,6 +638,7 @@ namespace nona
             lb_fun_shab.Items.Add("Анищенко-Астахов, exp");
             lb_fun_shab.Items.Add("Богданова-Такенса");
             lb_fun_shab.Items.Add("Ресслер_2");
+            lb_fun_shab.Items.Add("прост осциллятор");
             /*lb_fun_shab.Items.Add("Неймарка-Сакера");
             lb_fun_shab.Items.Add("Дуффинга");*/
 
@@ -858,6 +866,15 @@ namespace nona
                         dgv_par.Rows.Add("b", "1");
                         dgv_par.Rows.Add("c", "1");
                         dgv_par.Rows.Add("e", "0,1");
+                        break;
+                    };
+                case 8:
+                    {
+                        dgv_fun.Rows.Add("v", "-a*x++b*v+c.Math.Sin(d*t)", "", "1", "");
+                        dgv_fun.Rows.Add("x", "v", "", "1", "");
+                        dgv_par.Rows.Add("a", "1");
+                        dgv_par.Rows.Add("b", "1");
+                        dgv_par.Rows.Add("c", "1");
                         break;
                     };
                     /*case 7:
