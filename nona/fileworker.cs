@@ -56,7 +56,7 @@ namespace nona
             objects_out.Add(l_fun_3);
             List<String> l_fun_4 = new List<string>();
             for (i = 0; i < n - 1; i++)
-                l_fun_4.Add(dgv_temp[4, i].Value.ToString());
+                l_fun_4.Add(dgv_temp[4, i].Value != null? dgv_temp[4, i].Value.ToString() : "");
             objects_out.Add(l_fun_4);
 
 

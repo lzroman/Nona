@@ -4,9 +4,9 @@ using System.CodeDom.Compiler;
 
 public class dynamic_compiler
 {
-    private DataGridView dgv_fun;
-    private DataGridView dgv_par;
-    private DataGridView dgv_usl;
+    DataGridView dgv_fun;
+    DataGridView dgv_par;
+    DataGridView dgv_usl;
 
     public delegate double[] Func(double[] a, double[] p);
     public Func func;
@@ -17,7 +17,7 @@ public class dynamic_compiler
         dgv_par = in_dgv_par;
         dgv_usl = in_dgv_usl;
     }
-
+    
     public Func compile()
     {
         source();
@@ -30,12 +30,11 @@ public class dynamic_compiler
         int numb_fun = dgv_fun.Rows.Count - 1;
         string fun_s = "";
         string symb = "+-*/;,)<>=!%";
-
         for (i = 0; i < numb_fun; i++)
         {
             if ((bool)dgv_fun[2, i].Value == true)
             {
-                fun_s += "rt[" + Convert.ToString(i) + "] = a[" + Convert.ToString(i) + "]; ";
+                //fun_s += "rt[" + Convert.ToString(i) + "] = a[" + Convert.ToString(i) + "]; ";
                 j = 0;
                 while (!dgv_usl[0, j].Value.Equals(dgv_fun[0, i].Value))
                     j++;
@@ -110,7 +109,6 @@ public class dynamic_compiler
 
         string s = "using System; class C { public static double[] f(double[] a, double[] p) { double[] rt = new double[" + Convert.ToString(numb_fun) + "]; " + fun_s + "return rt; } }";
         func = (Func)Delegate.CreateDelegate(typeof(Func), compile(s).CompiledAssembly.CreateInstance("C").GetType().GetMethod("f"));
-
     }
 
     static CompilerResults compile(string source)

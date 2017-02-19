@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//using System.Threading;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Reflection;
@@ -22,14 +21,19 @@ namespace nona
         }
 
         dynamic_compiler compiler;
-        dynamic_compiler.Func func;
-        calc.diagram diag;
+        dynamic_compiler.Func func, func_c;
+        f_cont func_c_f;
+
+        bool cont;
+
         fileworker filework = new fileworker();
 
         calc.phas_port ph_port;
-
+        calc.diagram diag;
         calc.map_r map;
+
         bool map_ready = false;
+        double cont_step;
         
         Task map_drawer;
 
@@ -692,7 +696,15 @@ namespace nona
             get_all();
 
             compiler = new dynamic_compiler(dgv_fun, dgv_par, dgv_usl);
-            func = (dynamic_compiler.Func)compiler.compile();
+            if (rb_c.Checked)
+            {
+                cont = true;
+                func_c = compiler.compile();
+                func_c_f = new f_cont(func_c, numb_fun, cont_step);
+                func = func_c_f.Func_Get();
+            }
+            else
+                func = compiler.compile();
             map = new calc.map_r(func, numb_fun, pbar);
             map_ready = true;
             ph_port = new calc.phas_port(func, numb_fun);
@@ -703,6 +715,8 @@ namespace nona
         private void get_all()
         {
             int i;
+
+            cont_step = Convert.ToDouble(tb_step.Text);
 
             an = new double[numb_fun];
             for (i = 0; i < numb_fun; i++)

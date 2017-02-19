@@ -157,6 +157,8 @@
             this.boxxx = new System.Windows.Forms.TabControl();
             this.saveFileDialog_fun = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog_fun = new System.Windows.Forms.OpenFileDialog();
+            this.rb_dis = new System.Windows.Forms.RadioButton();
+            this.rb_c = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_colors)).BeginInit();
@@ -1124,6 +1126,8 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.rb_c);
+            this.tabPage4.Controls.Add(this.rb_dis);
             this.tabPage4.Controls.Add(this.label37);
             this.tabPage4.Controls.Add(this.tb_step);
             this.tabPage4.Controls.Add(this.b_fun_file_save);
@@ -1369,6 +1373,28 @@
             // 
             this.openFileDialog_fun.FileName = "openFileDialog1";
             // 
+            // rb_dis
+            // 
+            this.rb_dis.AutoSize = true;
+            this.rb_dis.Checked = true;
+            this.rb_dis.Location = new System.Drawing.Point(28, 374);
+            this.rb_dis.Name = "rb_dis";
+            this.rb_dis.Size = new System.Drawing.Size(133, 17);
+            this.rb_dis.TabIndex = 86;
+            this.rb_dis.TabStop = true;
+            this.rb_dis.Text = "Дискретная система";
+            this.rb_dis.UseVisualStyleBackColor = true;
+            // 
+            // rb_c
+            // 
+            this.rb_c.AutoSize = true;
+            this.rb_c.Location = new System.Drawing.Point(28, 397);
+            this.rb_c.Name = "rb_c";
+            this.rb_c.Size = new System.Drawing.Size(141, 17);
+            this.rb_c.TabIndex = 87;
+            this.rb_c.Text = "Непрерывная система";
+            this.rb_c.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1532,6 +1558,8 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog_fun;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.TextBox tb_step;
+        private System.Windows.Forms.RadioButton rb_c;
+        private System.Windows.Forms.RadioButton rb_dis;
     }
 }
 
