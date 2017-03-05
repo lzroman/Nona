@@ -52,7 +52,7 @@ namespace nona
         double[] an = new double[0];
         double[] al = new double[0];
         double[] pars = new double[0];
-        int pmax = 9, wtd, numb_fun, fp_a1, fp_a2, dia_a, dia_p, pp_a, pp_p1, pp_p2;
+        int pmax = 9, wtd, numb_fun, fp_a1, fp_a2, dia_a, dia_p, pp_a, pp_p1, pp_p2, cont_arg, cont_cond;
         String file_path;
 
         Bitmap bm_graph, bm_form2;
@@ -700,7 +700,7 @@ namespace nona
             {
                 cont = true;
                 func_c = compiler.compile();
-                func_c_f = new f_cont(func_c, numb_fun, cont_step);
+                func_c_f = new f_cont(func_c, numb_fun, cont_step, cont_arg, cont_cond);
                 func = func_c_f.Func_Get();
             }
             else
@@ -725,6 +725,10 @@ namespace nona
             al = new double[numb_fun];
             for (i = 0; i < numb_fun; i++)
                 al[i] = Convert.ToDouble(dgv_fun[3, i].Value);
+
+            cb_cont_arg.Items.Clear();
+            for (i = 0; i < numb_fun; i++)
+                cb_cont_arg.Items.Add(dgv_fun[0, i].Value);
 
             pars = new double[dgv_par.Rows.Count - 1];
             for (i = 0; i < dgv_par.Rows.Count - 1; i++)
@@ -794,6 +798,7 @@ namespace nona
             cb_pp_a.Items.Clear();
             cb_pp_p1.Items.Clear();
             cb_pp_p2.Items.Clear();
+            cb_cont_arg.Items.Clear();
         }
 
         private void b_add_eno_Click(object sender, EventArgs e)
@@ -987,6 +992,18 @@ namespace nona
         private void cb_fp_a2_SelectedIndexChanged(object sender, EventArgs e)
         {
             fp_a2 = cb_fp_a2.SelectedIndex;
+        }
+
+
+        private void cb_cont_arg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cont_arg = cb_cont_arg.SelectedIndex;
+        }
+
+
+        private void cb_cont_cond_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cont_cond = cb_cont_cond.SelectedIndex;
         }
 
         ///////////////////////////////////////////////////РАБОТА С ФАЙЛАМИ ФУНКЦИЙ

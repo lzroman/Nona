@@ -130,6 +130,8 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.rb_c = new System.Windows.Forms.RadioButton();
+            this.rb_dis = new System.Windows.Forms.RadioButton();
             this.label37 = new System.Windows.Forms.Label();
             this.tb_step = new System.Windows.Forms.TextBox();
             this.b_fun_file_save = new System.Windows.Forms.Button();
@@ -157,8 +159,10 @@
             this.boxxx = new System.Windows.Forms.TabControl();
             this.saveFileDialog_fun = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog_fun = new System.Windows.Forms.OpenFileDialog();
-            this.rb_dis = new System.Windows.Forms.RadioButton();
-            this.rb_c = new System.Windows.Forms.RadioButton();
+            this.label38 = new System.Windows.Forms.Label();
+            this.cb_cont_arg = new System.Windows.Forms.ComboBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.cb_cont_cond = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_colors)).BeginInit();
@@ -1126,6 +1130,10 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.cb_cont_cond);
+            this.tabPage4.Controls.Add(this.label39);
+            this.tabPage4.Controls.Add(this.cb_cont_arg);
+            this.tabPage4.Controls.Add(this.label38);
             this.tabPage4.Controls.Add(this.rb_c);
             this.tabPage4.Controls.Add(this.rb_dis);
             this.tabPage4.Controls.Add(this.label37);
@@ -1149,6 +1157,28 @@
             this.tabPage4.Text = "Функция";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // rb_c
+            // 
+            this.rb_c.AutoSize = true;
+            this.rb_c.Location = new System.Drawing.Point(357, 384);
+            this.rb_c.Name = "rb_c";
+            this.rb_c.Size = new System.Drawing.Size(141, 17);
+            this.rb_c.TabIndex = 87;
+            this.rb_c.Text = "Непрерывная система";
+            this.rb_c.UseVisualStyleBackColor = true;
+            // 
+            // rb_dis
+            // 
+            this.rb_dis.AutoSize = true;
+            this.rb_dis.Checked = true;
+            this.rb_dis.Location = new System.Drawing.Point(357, 361);
+            this.rb_dis.Name = "rb_dis";
+            this.rb_dis.Size = new System.Drawing.Size(133, 17);
+            this.rb_dis.TabIndex = 86;
+            this.rb_dis.TabStop = true;
+            this.rb_dis.Text = "Дискретная система";
+            this.rb_dis.UseVisualStyleBackColor = true;
+            // 
             // label37
             // 
             this.label37.AutoSize = true;
@@ -1168,9 +1198,9 @@
             // 
             // b_fun_file_save
             // 
-            this.b_fun_file_save.Location = new System.Drawing.Point(6, 328);
+            this.b_fun_file_save.Location = new System.Drawing.Point(357, 303);
             this.b_fun_file_save.Name = "b_fun_file_save";
-            this.b_fun_file_save.Size = new System.Drawing.Size(200, 23);
+            this.b_fun_file_save.Size = new System.Drawing.Size(160, 23);
             this.b_fun_file_save.TabIndex = 83;
             this.b_fun_file_save.Text = "Сохранить в файл";
             this.b_fun_file_save.UseVisualStyleBackColor = true;
@@ -1178,9 +1208,9 @@
             // 
             // b_fun_file_open
             // 
-            this.b_fun_file_open.Location = new System.Drawing.Point(6, 299);
+            this.b_fun_file_open.Location = new System.Drawing.Point(357, 274);
             this.b_fun_file_open.Name = "b_fun_file_open";
-            this.b_fun_file_open.Size = new System.Drawing.Size(200, 23);
+            this.b_fun_file_open.Size = new System.Drawing.Size(160, 23);
             this.b_fun_file_open.TabIndex = 82;
             this.b_fun_file_open.Text = "Открыть из файла";
             this.b_fun_file_open.UseVisualStyleBackColor = true;
@@ -1219,9 +1249,9 @@
             // lb_fun_shab
             // 
             this.lb_fun_shab.FormattingEnabled = true;
-            this.lb_fun_shab.Location = new System.Drawing.Point(212, 299);
+            this.lb_fun_shab.Location = new System.Drawing.Point(212, 273);
             this.lb_fun_shab.Name = "lb_fun_shab";
-            this.lb_fun_shab.Size = new System.Drawing.Size(139, 134);
+            this.lb_fun_shab.Size = new System.Drawing.Size(139, 160);
             this.lb_fun_shab.TabIndex = 78;
             // 
             // dgv_usl
@@ -1314,9 +1344,9 @@
             // 
             // b_add_eno
             // 
-            this.b_add_eno.Location = new System.Drawing.Point(357, 353);
+            this.b_add_eno.Location = new System.Drawing.Point(357, 332);
             this.b_add_eno.Name = "b_add_eno";
-            this.b_add_eno.Size = new System.Drawing.Size(156, 23);
+            this.b_add_eno.Size = new System.Drawing.Size(160, 23);
             this.b_add_eno.TabIndex = 75;
             this.b_add_eno.Text = "Добавить";
             this.b_add_eno.UseVisualStyleBackColor = true;
@@ -1373,27 +1403,47 @@
             // 
             this.openFileDialog_fun.FileName = "openFileDialog1";
             // 
-            // rb_dis
+            // label38
             // 
-            this.rb_dis.AutoSize = true;
-            this.rb_dis.Checked = true;
-            this.rb_dis.Location = new System.Drawing.Point(28, 374);
-            this.rb_dis.Name = "rb_dis";
-            this.rb_dis.Size = new System.Drawing.Size(133, 17);
-            this.rb_dis.TabIndex = 86;
-            this.rb_dis.TabStop = true;
-            this.rb_dis.Text = "Дискретная система";
-            this.rb_dis.UseVisualStyleBackColor = true;
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(12, 308);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(105, 13);
+            this.label38.TabIndex = 88;
+            this.label38.Text = "Ведущий аргумент:";
             // 
-            // rb_c
+            // cb_cont_arg
             // 
-            this.rb_c.AutoSize = true;
-            this.rb_c.Location = new System.Drawing.Point(28, 397);
-            this.rb_c.Name = "rb_c";
-            this.rb_c.Size = new System.Drawing.Size(141, 17);
-            this.rb_c.TabIndex = 87;
-            this.rb_c.Text = "Непрерывная система";
-            this.rb_c.UseVisualStyleBackColor = true;
+            this.cb_cont_arg.FormattingEnabled = true;
+            this.cb_cont_arg.Location = new System.Drawing.Point(123, 305);
+            this.cb_cont_arg.Name = "cb_cont_arg";
+            this.cb_cont_arg.Size = new System.Drawing.Size(83, 21);
+            this.cb_cont_arg.TabIndex = 89;
+            this.cb_cont_arg.SelectedIndexChanged += new System.EventHandler(this.cb_cont_arg_SelectedIndexChanged);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(12, 337);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(54, 13);
+            this.label39.TabIndex = 90;
+            this.label39.Text = "Условие:";
+            // 
+            // cb_cont_cond
+            // 
+            this.cb_cont_cond.FormattingEnabled = true;
+            this.cb_cont_cond.Items.AddRange(new object[] {
+            "Нет",
+            "Смена знака производной",
+            "Экстремум",
+            "Максимум",
+            "Миниум"});
+            this.cb_cont_cond.Location = new System.Drawing.Point(72, 334);
+            this.cb_cont_cond.Name = "cb_cont_cond";
+            this.cb_cont_cond.Size = new System.Drawing.Size(134, 21);
+            this.cb_cont_cond.TabIndex = 91;
+            this.cb_cont_cond.SelectedIndexChanged += new System.EventHandler(this.cb_cont_cond_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -1560,6 +1610,10 @@
         private System.Windows.Forms.TextBox tb_step;
         private System.Windows.Forms.RadioButton rb_c;
         private System.Windows.Forms.RadioButton rb_dis;
+        private System.Windows.Forms.ComboBox cb_cont_cond;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.ComboBox cb_cont_arg;
+        private System.Windows.Forms.Label label38;
     }
 }
 
