@@ -67,12 +67,12 @@ namespace nona.calc
 
             graph_set.pboxsize.X = pb_w;
             graph_set.pboxsize.Y = pb_h;
-            graph_set.px_min = b1;
-            graph_set.px_max = b2;
-            graph_set.py_min = a1;
-            graph_set.py_max = a2;
-            graph_set.px_num = b_n;
-            graph_set.py_num = a_n;
+            graph_set.px_min = a1;
+            graph_set.px_max = a2;
+            graph_set.py_min = b1;
+            graph_set.py_max = b2;
+            graph_set.px_num = a_n;
+            graph_set.py_num = b_n;
             graph_set.num_col = num_col;
             graph = new graphics.map_r(graph_set);
 
