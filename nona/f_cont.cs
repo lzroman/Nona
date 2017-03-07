@@ -58,6 +58,7 @@ namespace nona
                 case 2://экстремум
                     while (Math.Sign(rt_l[sw] - rt_ll[sw]) == Math.Sign(rt[sw] - rt_l[sw]))
                     {
+                        rt_ll = rt_l;
                         rt_l = rt;
                         rt = integ_step(rt_l, p);
                     }
@@ -65,13 +66,15 @@ namespace nona
                 case 3://максимум
                     while (!(rt_ll[sw] < rt_l[sw] && rt_l[sw] > rt[sw]))
                     {
+                        rt_ll = rt_l;
                         rt_l = rt;
                         rt = integ_step(rt_l, p);
                     }
                     break;
                 case 4://минимум
-                    while (!(rt_ll[sw] < rt_l[sw] && rt_l[sw] > rt[sw]))
+                    while (!(rt_ll[sw] > rt_l[sw] && rt_l[sw] < rt[sw]))
                     {
+                        rt_ll = rt_l;
                         rt_l = rt;
                         rt = integ_step(rt_l, p);
                     }
