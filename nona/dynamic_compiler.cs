@@ -10,6 +10,9 @@ public class dynamic_compiler
 
     public delegate double[] Func(double[] a, double[] p);
     public Func func;
+    public delegate double Plane(double[] a, double[] p);
+    public Plane plane;
+    string equation;
 
     public dynamic_compiler(DataGridView in_dgv_fun, DataGridView in_dgv_par, DataGridView in_dgv_usl)
 	{
@@ -17,11 +20,86 @@ public class dynamic_compiler
         dgv_par = in_dgv_par;
         dgv_usl = in_dgv_usl;
     }
+
+    public dynamic_compiler(DataGridView in_dgv_fun, DataGridView in_dgv_par, string equation_in)
+    {
+        dgv_fun = in_dgv_fun;
+        dgv_par = in_dgv_par;
+        equation = equation_in;
+    }
     
     public Func compile()
     {
         source();
         return func;
+    }
+
+    public Plane compile_equation()
+    {
+        source_equation();
+        return plane;
+    }
+
+    public Func func_equation()
+    {
+        source_equation();
+        return func;
+    }
+
+    private void source_equation()
+    {
+        int i, j, char_numb;
+        int numb_fun = dgv_fun.Rows.Count - 1;
+        string fun_s = fun_s = equation;
+        string symb = "+-*/;,)<>=!%";
+
+        for (i = 0; i < numb_fun; i++)
+        {
+            char_numb = fun_s.IndexOf(Convert.ToString(dgv_fun[0, i].Value));
+            while (char_numb != -1)
+            {
+                if (char_numb + Convert.ToString(dgv_fun[0, i].Value).Length == fun_s.Length)
+                {
+                    fun_s = fun_s.Remove(char_numb, Convert.ToString(dgv_fun[0, i].Value).Length);
+                    fun_s = fun_s.Insert(char_numb, "a[" + Convert.ToString(i) + "]");
+                }
+                else
+                {
+                    for (j = 0; j < symb.Length; j++)
+                    {
+
+                        if (fun_s[char_numb + Convert.ToString(dgv_fun[0, i].Value).Length].Equals(symb[j]))
+                        {
+                            fun_s = fun_s.Remove(char_numb, Convert.ToString(dgv_fun[0, i].Value).Length);
+                            fun_s = fun_s.Insert(char_numb, "a[" + Convert.ToString(i) + "]");
+                        };
+
+                    };
+                };
+                char_numb++;
+                char_numb = fun_s.IndexOf(Convert.ToString(dgv_fun[0, i].Value), char_numb);
+            };
+        };
+
+        for (i = 0; i < dgv_par.Rows.Count - 1; i++)
+        {
+            char_numb = fun_s.IndexOf(Convert.ToString(dgv_par[0, i].Value));
+            while (char_numb != -1)
+            {
+                for (j = 0; j < symb.Length; j++)
+                {
+                    if (fun_s[char_numb + Convert.ToString(dgv_par[0, i].Value).Length].Equals(symb[j]))
+                    {
+                        fun_s = fun_s.Remove(char_numb, Convert.ToString(dgv_par[0, i].Value).Length);
+                        fun_s = fun_s.Insert(char_numb, "p[" + Convert.ToString(i) + "]");
+                    };
+                };
+                char_numb++;
+                char_numb = fun_s.IndexOf(Convert.ToString(dgv_par[0, i].Value), char_numb);
+            };
+        };
+        string s = "using System; class C { public static double f(double[] a, double[] p) { return " + fun_s + ";}}";
+        plane = (Plane)Delegate.CreateDelegate(typeof(Plane), compile(s).CompiledAssembly.CreateInstance("C").GetType().GetMethod("f"));
     }
 
     private void source()

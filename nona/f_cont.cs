@@ -12,14 +12,16 @@ namespace nona
 
         public double step;
         int f_n, sw, cond;
+        dynamic_compiler.Plane plane_eq_fun;
 
-        public f_cont(dynamic_compiler.Func func_in, int f_n_in, double step_in, int sw_in, int cond_in)
+        public f_cont(dynamic_compiler.Func func_in, int f_n_in, double step_in, int sw_in, int cond_in, dynamic_compiler.Plane plane_eq_fun_in)
         {
             func = func_in;
             f_n = f_n_in;
             step = step_in;
             sw = sw_in;
             cond = cond_in;
+            plane_eq_fun = plane_eq_fun_in;
         }
 
         public dynamic_compiler.Func Func_Get()
@@ -43,6 +45,8 @@ namespace nona
             double[] rt_ll = new double[f_n];
             double[] rt_l = new double[f_n];
             double[] rt = new double[f_n];
+            double[] rt_med = new double[f_n];
+            double plane_val;
             rt_ll = a;
             rt_l = integ_step(rt_ll, p);
             rt = integ_step(rt_l, p);
@@ -79,6 +83,21 @@ namespace nona
                         rt = integ_step(rt_l, p);
                     }
                     break;
+                case 5://пересечение с плоскостью
+                    for (i = 0; i < f_n; i++)
+                        rt_med[i] = (rt_ll[i] + rt_l[i]) / 2.0;
+                    plane_val = plane_eq_fun(rt_med, p);
+                    while (Math.Sign(plane_val - rt_ll[sw]) == Math.Sign(plane_val - rt_l[sw]))
+                    {
+                        rt_ll = rt_l;
+                        rt_l = rt;
+                        rt = integ_step(rt_l, p);
+                        for (i = 0; i < f_n; i++)
+                            rt_med[i] = (rt_ll[i] + rt_l[i]) / 2.0;
+                        plane_val = plane_eq_fun(rt_med, p);
+                    }
+                    break;
+
 
             }
             return rt;

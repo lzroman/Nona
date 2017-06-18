@@ -38,6 +38,8 @@ namespace nona.calc
 
             for (i = 0; i < numb; i++)
             {
+
+                stop = false;
                 an = func(al, pars);
 
                 for (j = 0; j < numb_fun; j++)

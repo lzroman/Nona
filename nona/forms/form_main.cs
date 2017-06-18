@@ -20,8 +20,9 @@ namespace nona
             InitializeComponent();
         }
 
-        dynamic_compiler compiler;
+        dynamic_compiler compiler, compiler_plane;
         dynamic_compiler.Func func, func_c;
+        dynamic_compiler.Plane func_plane_eq;
         f_cont func_c_f;
 
         bool cont;
@@ -53,7 +54,7 @@ namespace nona
         double[] al = new double[0];
         double[] pars = new double[0];
         int pmax = 9, wtd, numb_fun, fp_a1, fp_a2, dia_a, dia_p, pp_a, pp_p1, pp_p2, cont_arg, cont_cond;
-        String file_path;
+        String file_path, plane_eq;
 
         Bitmap bm_graph, bm_form2;
         bool b_graph = false, col_sel = false, ph_form2 = false, stop = false;
@@ -696,11 +697,13 @@ namespace nona
             get_all();
 
             compiler = new dynamic_compiler(dgv_fun, dgv_par, dgv_usl);
+            compiler_plane = new dynamic_compiler(dgv_fun, dgv_par, plane_eq);
             if (rb_c.Checked)
             {
                 cont = true;
                 func_c = compiler.compile();
-                func_c_f = new f_cont(func_c, numb_fun, cont_step, cont_arg, cont_cond);
+                func_plane_eq = compiler_plane.compile_equation();
+                func_c_f = new f_cont(func_c, numb_fun, cont_step, cont_arg, cont_cond, func_plane_eq);
                 func = func_c_f.Func_Get();
             }
             else
@@ -717,6 +720,7 @@ namespace nona
             int i;
 
             cont_step = Convert.ToDouble(tb_step.Text);
+            plane_eq = tb_plane.Text;
 
             an = new double[numb_fun];
             for (i = 0; i < numb_fun; i++)
