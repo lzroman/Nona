@@ -643,7 +643,7 @@ namespace nona
             lb_fun_shab.Items.Add("Анищенко-Астахов, exp");
             lb_fun_shab.Items.Add("Богданова-Такенса");
             lb_fun_shab.Items.Add("Ресслер_2");
-            lb_fun_shab.Items.Add("прост осциллятор");
+            //lb_fun_shab.Items.Add("прост осциллятор");
             /*lb_fun_shab.Items.Add("Неймарка-Сакера");
             lb_fun_shab.Items.Add("Дуффинга");*/
 
@@ -891,7 +891,7 @@ namespace nona
                         dgv_par.Rows.Add("e", "0,1");
                         break;
                     };
-                case 8:
+                /*case 8:
                     {
                         dgv_fun.Rows.Add("v", "-a*x++b*v+c.Math.Sin(d*t)", "", "1", "");
                         dgv_fun.Rows.Add("x", "v", "", "1", "");
@@ -899,7 +899,7 @@ namespace nona
                         dgv_par.Rows.Add("b", "1");
                         dgv_par.Rows.Add("c", "1");
                         break;
-                    };
+                    };*/
                     /*case 7:
                         {
                             dgv_fun.Rows.Add("y", "y+e*y*(l+u*Math.Pow(x,2)-Math.Pow(x,4))-e*x", "", "1", "yn");
